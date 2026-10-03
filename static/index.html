@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Second Look - Is this message a scam?</title>
+  <meta name="description" content="Paste a suspicious message and get a simple answer. Built for my parent with Gemma, an open model." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>🛡️ Second Look</h1>
+      <p class="tagline" id="t-tagline">Got a strange message? Check it here before you click, pay, or share anything.</p>
+    </header>
+
+    <section class="card">
+      <label class="lang-row">
+        <span id="t-lang">My language</span>
+        <select id="language">
+          <option>English</option>
+          <option value="Hindi">हिन्दी (Hindi)</option>
+          <option value="Bengali">বাংলা (Bengali)</option>
+          <option value="Marathi">मराठी (Marathi)</option>
+          <option value="Tamil">தமிழ் (Tamil)</option>
+          <option value="Telugu">తెలుగు (Telugu)</option>
+          <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+          <option value="Malayalam">മലയാളം (Malayalam)</option>
+          <option value="Gujarati">ગુજરાતી (Gujarati)</option>
+          <option value="Punjabi">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="Urdu">اردو (Urdu)</option>
+          <option value="Spanish">Español</option>
+        </select>
+      </label>
+
+      <label for="text" class="big-label">1. Paste the message here</label>
+      <textarea id="text" rows="6" placeholder="Example: Dear customer, your SBI account will be blocked today. Update PAN now: http://sbi-kyc-update.in"></textarea>
+
+      <div class="big-label">2. Or add a screenshot</div>
+      <label class="upload" id="upload-label">
+        <input type="file" id="image" accept="image/*" />
+        <span id="upload-text">📷 Choose screenshot</span>
+      </label>
+      <img id="preview" alt="" hidden />
+
+      <button id="check" class="primary">🔍 Check this message</button>
+      <p class="privacy">🔒 Card, Aadhaar, PAN and account numbers are removed before checking. We never save your message.</p>
+    </section>
+
+    <section id="loading" class="card loading" hidden>
+      <div class="spinner"></div>
+      <p>Checking carefully… please wait</p>
+    </section>
+
+    <section id="error" class="card error" hidden></section>
+
+    <section id="result" class="card result" hidden>
+      <div id="verdict" class="verdict"></div>
+      <p id="headline" class="headline"></p>
+
+      <h2 id="h-flags">Why</h2>
+      <ul id="flags"></ul>
+
+      <h2 id="h-todo">What to do</h2>
+      <ol id="todo"></ol>
+
+      <div class="actions">
+        <button id="speak">🔊 Read aloud</button>
+        <button id="share" class="whatsapp">📤 Send to my family</button>
+        <button id="again">↩︎ Check another</button>
+      </div>
+      <p class="model" id="model"></p>
+    </section>
+
+    <section id="history" class="card" hidden>
+      <h2>Recent checks (family view)</h2>
+      <ul id="history-list" class="history"></ul>
+    </section>
+
+    <footer>
+      Made with ❤️ for my mom · Powered by <a href="https://ai.google.dev/gemma" target="_blank" rel="noopener">Gemma</a>, an open model ·
+      In India, report fraud at <a href="tel:1930">1930</a> or <a href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in</a>
+    </footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
