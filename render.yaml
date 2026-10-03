@@ -12,7 +12,7 @@ services:
       - key: LLM_BASE_URL
         value: https://generativelanguage.googleapis.com/v1beta/openai
       - key: LLM_MODEL
-        value: gemma-4-31b-it,gemma-3-27b-it
+        value: gemma-4-26b-a4b-it,gemma-4-31b-it
       - key: REGION
         value: India
       - key: LLM_API_KEY

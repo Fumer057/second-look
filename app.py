@@ -29,7 +29,7 @@ logging.basicConfig(level=logging.INFO)
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai").rstrip("/")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 # Comma-separated list: first model that works wins (handy when model IDs change).
-LLM_MODELS = [m.strip() for m in os.getenv("LLM_MODEL", "gemma-4-31b-it,gemma-3-27b-it").split(",") if m.strip()]
+LLM_MODELS = [m.strip() for m in os.getenv("LLM_MODEL", "gemma-4-26b-a4b-it,gemma-4-31b-it").split(",") if m.strip()]
 REGION = os.getenv("REGION", "India")
 MONGODB_URI = os.getenv("MONGODB_URI", "")
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
@@ -105,6 +105,8 @@ The message to check:
 
 
 def extract_json(raw: str) -> dict:
+    # Gemma 4 "thinks" first and returns <thought>...</thought> inside the content.
+    raw = re.sub(r"<thought>.*?</thought>", "", raw, flags=re.DOTALL | re.IGNORECASE)
     raw = raw.strip()
     raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE)
     start, end = raw.find("{"), raw.rfind("}")
@@ -148,7 +150,7 @@ async def ask_gemma(content: list[dict]) -> tuple[dict, str]:
                 "model": model,
                 "messages": [{"role": "user", "content": content}],
                 "temperature": 0.2,
-                "max_tokens": 900,
+                "max_tokens": 4096,
             }
             try:
                 resp = await client.post(f"{LLM_BASE_URL}/chat/completions", headers=headers, json=payload)

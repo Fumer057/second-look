@@ -36,9 +36,10 @@ LLM_MODEL=gemma3:4b
 You only change configuration, not code. Swap in any open model you like.
 
 ## Deploy on Render
-1. Push this repo to GitHub.
-2. In Render, choose **New → Blueprint** and pick the repo. It reads `render.yaml`.
-3. Set `LLM_API_KEY` to a free Google AI Studio key from https://aistudio.google.com/apikey.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Fumer057/second-look)
+
+1. Click the button, or in Render choose **New → Blueprint** and pick this repo. It reads `render.yaml`.
+2. Set `LLM_API_KEY` to a free Google AI Studio key from https://aistudio.google.com/apikey.
 
 ## Stack
 FastAPI · vanilla HTML/CSS/JS · Gemma (via the OpenAI-compatible API) · Render · optional MongoDB Atlas
