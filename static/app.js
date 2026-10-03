@@ -153,8 +153,20 @@ async function loadHistory() {
   } catch { /* history is optional */ }
 }
 
+async function loadConfig() {
+  try {
+    const res = await fetch("/api/config");
+    const data = await res.json();
+    if (data.whatsapp_link) {
+      $("wa-link").href = data.whatsapp_link;
+      show("wa-link-container", true);
+    }
+  } catch {}
+}
+
 $("check").addEventListener("click", check);
 $("speak").addEventListener("click", speak);
 $("share").addEventListener("click", share);
 $("again").addEventListener("click", reset);
 loadHistory();
+loadConfig();
